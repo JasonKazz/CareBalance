@@ -1,29 +1,33 @@
-# Architecture and implementation outline
-
-The current scaffold implements static frontend delivery and GET /api/health. All simulation components below are planned.
+# Community clinic contract calculator
 
 ```mermaid
 flowchart TD
-    UI[Frontend: assumptions, sliders, charts] --> API[Python API: validate bounded inputs]
-    FIX[Synthetic scenario inputs] --> ENGINE[Scenario engine: identical cases for each contract]
-    API --> ENGINE
-    ENGINE --> MODELS[Payment models: fee-for-service, bundle, shared savings]
-    MODELS --> METRICS[Accounting: insurer payments, provider costs and margin]
-    METRICS --> SEARCH[Bounded search: feasible terms and tradeoffs]
-    SEARCH --> UI
-    SCHEMA[Shared JSON request/result schemas] -.-> API
-    SCHEMA -.-> UI
+    UI[Browser: assumptions and demo scenarios] --> API[Python local API: validate bounded JSON]
+    SCHEMA[Shared request schema] --> UI
+    SCHEMA --> API
+    FIX[Synthetic clinic example] --> UI
+    API --> ACCOUNT[Pure accounting: visits, costs, payments, margin]
+    ACCOUNT --> STRESS[Baseline and stressed demand + plotted sweep]
+    STRESS --> SOLVE[Intersect rate bounds under margin and budget constraints]
+    SOLVE --> CAP[Reject terms when appointment capacity is exceeded]
+    CAP --> REPORT[Comparison cards, rate ranges, chart, audit, JSON export]
+    REPORT --> UI
 ```
 
-## Implementation order
+## Implemented
 
-1. Define payment formulas, units, episode boundaries, shared-savings benchmark and eligibility assumptions. Hand-check examples.
-2. Define shared JSON request/result schemas and enforce input bounds in Python.
-3. Implement pure model functions and arithmetic/accounting tests.
-4. Evaluate all contracts against identical synthetic scenarios; expose assumptions and reproducible results.
-5. Add bounded search across contract terms. Return feasible alternatives or an explicit no-solution result.
-6. Connect frontend controls and charts; verify one complete demo flow.
+- One plain HTML/CSS/JavaScript frontend and one standard-library Python server.
+- Two models: per-visit reimbursement and per-enrolled-patient monthly payment for the same defined clinic services.
+- Analytical feasible-rate intervals; no stochastic or AI optimization.
+- Bounded schema-driven input validation, 16 KB request limit, static-file allowlist, local-only binding.
+- No external provider, database, credentials, persistence, or deployment changes.
+- Browser changes invalidate stale results and cancel superseded requests. Each calculation is small and synchronous; asynchronous jobs are unnecessary here.
 
-## Boundaries
+## API
 
-Use one local Python process to serve the frontend and API. No database, cloud deployment, external provider, or secret is necessary. The local .env is ignored and currently unused; add one configuration loader only if integrations are introduced. A future language model may explain computed results but must not produce financial figures or claim clinical efficacy. All public-data integrations are out of scope for the starter.
+- `GET /api/health`: health and implementation status.
+- `GET /api/schema`: input schema including labels, bounds, and defaults.
+- `GET /api/example`: fictional clinic inputs.
+- `POST /api/analyze`: validated inputs to deterministic result; see shared result schema.
+
+See model.md for formulas, objective, assumptions, and limitations. A future AI explainer could summarize already-calculated results but is not necessary for the current product.
