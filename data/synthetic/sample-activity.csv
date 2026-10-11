@@ -1,0 +1,8 @@
+code,description,annual_volume,current_rate
+VISIT-A,Short clinic appointment,1200,100.00
+VISIT-B,Standard clinic appointment,1800,145.00
+VISIT-C,Extended clinic appointment,600,210.00
+CHECK-D,Follow-up check,400,80.00
+CARE-E,Care coordination encounter,1000,55.00
+SCREEN-F,Screening appointment,300,65.00
+OTHER-G,Service not in proposed schedule,200,90.00

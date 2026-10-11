@@ -1,0 +1,18 @@
+ILLUSTRATIVE DOCUMENT — NOT A REAL INSURANCE CONTRACT
+Harbor Community Clinic · Proposed outpatient schedule
+Proposal date: January 1, 2027. This fictional example is for software demonstration only.
+
+SCOPE
+The USD rates below apply per completed service in this example. Rates are fixed amounts, not percentages. Codes are fictional labels. No medical coding guidance is implied.
+
+PROPOSED FEE SCHEDULE
+Code | Description | Proposed USD rate
+VISIT-A | Short clinic appointment | $110.00
+VISIT-B | Standard clinic appointment | $130.00
+VISIT-C | Extended clinic appointment | $195.00
+CHECK-D | Follow-up check | $88.00
+CARE-E | Care coordination encounter | $48.00
+SCREEN-F | Screening appointment | $72.00
+
+CONDITIONS NOT MODELED BY THIS DEMO
+Payment is subject to eligibility and documentation requirements. A potential quality bonus requires a separate addendum, which is not attached. This document does not provide denial rates, collection performance, or payment timing.
