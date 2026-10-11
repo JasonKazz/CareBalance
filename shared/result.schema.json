@@ -1,0 +1,499 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ClinicAnalysis",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "inputs",
+    "baseline",
+    "stress",
+    "terms",
+    "sweep",
+    "assumptions"
+  ],
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "inputs": {
+      "$ref": "request.schema.json"
+    },
+    "baseline": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "visits",
+        "capacity_gap",
+        "capacity_use_pct",
+        "contracts"
+      ],
+      "properties": {
+        "visits": {
+          "type": "number"
+        },
+        "capacity_gap": {
+          "type": "number"
+        },
+        "capacity_use_pct": {
+          "type": "number"
+        },
+        "contracts": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "ffs",
+            "pmpm"
+          ],
+          "properties": {
+            "ffs": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "revenue",
+                "payer_spend",
+                "cost",
+                "surplus",
+                "margin_pct",
+                "capacity_ok",
+                "budget_ok",
+                "margin_ok",
+                "feasible"
+              ],
+              "properties": {
+                "revenue": {
+                  "type": "number"
+                },
+                "payer_spend": {
+                  "type": "number"
+                },
+                "cost": {
+                  "type": "number"
+                },
+                "surplus": {
+                  "type": "number"
+                },
+                "margin_pct": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "capacity_ok": {
+                  "type": "boolean"
+                },
+                "budget_ok": {
+                  "type": "boolean"
+                },
+                "margin_ok": {
+                  "type": "boolean"
+                },
+                "feasible": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "pmpm": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "revenue",
+                "payer_spend",
+                "cost",
+                "surplus",
+                "margin_pct",
+                "capacity_ok",
+                "budget_ok",
+                "margin_ok",
+                "feasible"
+              ],
+              "properties": {
+                "revenue": {
+                  "type": "number"
+                },
+                "payer_spend": {
+                  "type": "number"
+                },
+                "cost": {
+                  "type": "number"
+                },
+                "surplus": {
+                  "type": "number"
+                },
+                "margin_pct": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "capacity_ok": {
+                  "type": "boolean"
+                },
+                "budget_ok": {
+                  "type": "boolean"
+                },
+                "margin_ok": {
+                  "type": "boolean"
+                },
+                "feasible": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "stress": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "visits",
+        "capacity_gap",
+        "capacity_use_pct",
+        "contracts"
+      ],
+      "properties": {
+        "visits": {
+          "type": "number"
+        },
+        "capacity_gap": {
+          "type": "number"
+        },
+        "capacity_use_pct": {
+          "type": "number"
+        },
+        "contracts": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "ffs",
+            "pmpm"
+          ],
+          "properties": {
+            "ffs": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "revenue",
+                "payer_spend",
+                "cost",
+                "surplus",
+                "margin_pct",
+                "capacity_ok",
+                "budget_ok",
+                "margin_ok",
+                "feasible"
+              ],
+              "properties": {
+                "revenue": {
+                  "type": "number"
+                },
+                "payer_spend": {
+                  "type": "number"
+                },
+                "cost": {
+                  "type": "number"
+                },
+                "surplus": {
+                  "type": "number"
+                },
+                "margin_pct": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "capacity_ok": {
+                  "type": "boolean"
+                },
+                "budget_ok": {
+                  "type": "boolean"
+                },
+                "margin_ok": {
+                  "type": "boolean"
+                },
+                "feasible": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "pmpm": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "revenue",
+                "payer_spend",
+                "cost",
+                "surplus",
+                "margin_pct",
+                "capacity_ok",
+                "budget_ok",
+                "margin_ok",
+                "feasible"
+              ],
+              "properties": {
+                "revenue": {
+                  "type": "number"
+                },
+                "payer_spend": {
+                  "type": "number"
+                },
+                "cost": {
+                  "type": "number"
+                },
+                "surplus": {
+                  "type": "number"
+                },
+                "margin_pct": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "capacity_ok": {
+                  "type": "boolean"
+                },
+                "budget_ok": {
+                  "type": "boolean"
+                },
+                "margin_ok": {
+                  "type": "boolean"
+                },
+                "feasible": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "terms": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ffs",
+        "pmpm"
+      ],
+      "properties": {
+        "ffs": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "break_even_rate",
+            "minimum_rate",
+            "maximum_rate",
+            "recommended_rate",
+            "feasible",
+            "reasons"
+          ],
+          "properties": {
+            "break_even_rate": {
+              "type": "number"
+            },
+            "minimum_rate": {
+              "type": "number"
+            },
+            "maximum_rate": {
+              "type": "number"
+            },
+            "recommended_rate": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "feasible": {
+              "type": "boolean"
+            },
+            "reasons": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "pmpm": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "break_even_rate",
+            "minimum_rate",
+            "maximum_rate",
+            "recommended_rate",
+            "feasible",
+            "reasons"
+          ],
+          "properties": {
+            "break_even_rate": {
+              "type": "number"
+            },
+            "minimum_rate": {
+              "type": "number"
+            },
+            "maximum_rate": {
+              "type": "number"
+            },
+            "recommended_rate": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "feasible": {
+              "type": "boolean"
+            },
+            "reasons": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "sweep": {
+      "type": "array",
+      "minItems": 21,
+      "maxItems": 21,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "additional_visits_pct",
+          "visits",
+          "capacity_gap",
+          "capacity_use_pct",
+          "contracts"
+        ],
+        "properties": {
+          "additional_visits_pct": {
+            "type": "number"
+          },
+          "visits": {
+            "type": "number"
+          },
+          "capacity_gap": {
+            "type": "number"
+          },
+          "capacity_use_pct": {
+            "type": "number"
+          },
+          "contracts": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "ffs",
+              "pmpm"
+            ],
+            "properties": {
+              "ffs": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "revenue",
+                  "payer_spend",
+                  "cost",
+                  "surplus",
+                  "margin_pct",
+                  "capacity_ok",
+                  "budget_ok",
+                  "margin_ok",
+                  "feasible"
+                ],
+                "properties": {
+                  "revenue": {
+                    "type": "number"
+                  },
+                  "payer_spend": {
+                    "type": "number"
+                  },
+                  "cost": {
+                    "type": "number"
+                  },
+                  "surplus": {
+                    "type": "number"
+                  },
+                  "margin_pct": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "capacity_ok": {
+                    "type": "boolean"
+                  },
+                  "budget_ok": {
+                    "type": "boolean"
+                  },
+                  "margin_ok": {
+                    "type": "boolean"
+                  },
+                  "feasible": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "pmpm": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "revenue",
+                  "payer_spend",
+                  "cost",
+                  "surplus",
+                  "margin_pct",
+                  "capacity_ok",
+                  "budget_ok",
+                  "margin_ok",
+                  "feasible"
+                ],
+                "properties": {
+                  "revenue": {
+                    "type": "number"
+                  },
+                  "payer_spend": {
+                    "type": "number"
+                  },
+                  "cost": {
+                    "type": "number"
+                  },
+                  "surplus": {
+                    "type": "number"
+                  },
+                  "margin_pct": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "capacity_ok": {
+                    "type": "boolean"
+                  },
+                  "budget_ok": {
+                    "type": "boolean"
+                  },
+                  "margin_ok": {
+                    "type": "boolean"
+                  },
+                  "feasible": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "assumptions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

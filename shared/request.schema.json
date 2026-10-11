@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ClinicScenario",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "patients",
+    "visits_per_patient",
+    "capacity",
+    "fixed_cost",
+    "visit_cost",
+    "ffs_rate",
+    "pmpm_rate",
+    "payer_budget",
+    "min_margin",
+    "stress_pct"
+  ],
+  "properties": {
+    "patients": {
+      "title": "Enrolled patients",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 100000,
+      "default": 1500
+    },
+    "visits_per_patient": {
+      "title": "Visits per patient / month",
+      "type": "number",
+      "minimum": 0.01,
+      "maximum": 10,
+      "default": 0.3
+    },
+    "capacity": {
+      "title": "Available appointments / month",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1000000,
+      "default": 650
+    },
+    "fixed_cost": {
+      "title": "Fixed operating costs / month",
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100000000,
+      "default": 35000
+    },
+    "visit_cost": {
+      "title": "Additional cost per visit",
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100000,
+      "default": 35
+    },
+    "ffs_rate": {
+      "title": "Payment per visit",
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1000000000000,
+      "default": 110
+    },
+    "pmpm_rate": {
+      "title": "Payment per patient / month",
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1000000000000,
+      "default": 38
+    },
+    "payer_budget": {
+      "title": "Insurer budget / month",
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100000000,
+      "default": 65000
+    },
+    "min_margin": {
+      "title": "Minimum operating margin (%)",
+      "type": "number",
+      "minimum": 0,
+      "maximum": 50,
+      "default": 5
+    },
+    "stress_pct": {
+      "title": "Additional visits in stress case (%)",
+      "type": "number",
+      "minimum": 0,
+      "maximum": 200,
+      "default": 40
+    }
+  }
+}

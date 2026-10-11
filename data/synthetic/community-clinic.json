@@ -1,0 +1,12 @@
+{
+  "patients": 1500,
+  "visits_per_patient": 0.3,
+  "capacity": 650,
+  "fixed_cost": 35000,
+  "visit_cost": 35,
+  "ffs_rate": 110,
+  "pmpm_rate": 38,
+  "payer_budget": 65000,
+  "min_margin": 5,
+  "stress_pct": 40
+}
