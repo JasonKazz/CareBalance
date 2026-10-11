@@ -1,33 +1,28 @@
-# Community clinic contract calculator
+# Architecture
 
 ```mermaid
-flowchart TD
-    UI[Browser: assumptions and demo scenarios] --> API[Python local API: validate bounded JSON]
-    SCHEMA[Shared request schema] --> UI
-    SCHEMA --> API
-    FIX[Synthetic clinic example] --> UI
-    API --> ACCOUNT[Pure accounting: visits, costs, payments, margin]
-    ACCOUNT --> STRESS[Baseline and stressed demand + plotted sweep]
-    STRESS --> SOLVE[Intersect rate bounds under margin and budget constraints]
-    SOLVE --> CAP[Reject terms when appointment capacity is exceeded]
-    CAP --> REPORT[Comparison cards, rate ranges, chart, audit, JSON export]
-    REPORT --> UI
+flowchart LR
+    PDF[PDF / TXT offer] --> READ[Local bounded text reader]
+    READ --> EXTRACT[Local row parser OR opt-in Gemini extraction]
+    EXTRACT --> CHECK[Quote + code + amount presence checks]
+    CHECK --> REVIEW[User reviews, corrects and selects rates]
+    CSV[Aggregate activity CSV] --> VALIDATE[Strict CSV validation]
+    REVIEW --> MATCH[Exact service-code matching]
+    VALIDATE --> MATCH
+    MATCH --> MONEY[Decimal repricing and counteroffer arithmetic]
+    MONEY --> UI[Contributions, coverage, evidence and JSON export]
 ```
 
-## Implemented
+One local Python service serves one buildless frontend. No database or cloud deployment. `/clinic` retains the earlier capacity-planning tool as a separate screen.
 
-- One plain HTML/CSS/JavaScript frontend and one standard-library Python server.
-- Two models: per-visit reimbursement and per-enrolled-patient monthly payment for the same defined clinic services.
-- Analytical feasible-rate intervals; no stochastic or AI optimization.
-- Bounded schema-driven input validation, 16 KB request limit, static-file allowlist, local-only binding.
-- No external provider, database, credentials, persistence, or deployment changes.
-- Browser changes invalidate stale results and cancel superseded requests. Each calculation is small and synchronous; asynchronous jobs are unnecessary here.
+PDFs are processed in a child process with a wall timeout and CPU limit; Linux additionally gets an address-space limit. macOS does not reliably support that memory limit. The application limits input bytes, pages, extracted text, rate rows, and CSV rows. No temporary media files are written. Gemini requests contain extracted contract text only, require explicit disclosure acknowledgement, have no automatic retries and use a semaphore of two. A browser navigation does not guarantee cancellation of an already-sent provider request.
 
-## API
+## Endpoints
 
-- `GET /api/health`: health and implementation status.
-- `GET /api/schema`: input schema including labels, bounds, and defaults.
-- `GET /api/example`: fictional clinic inputs.
-- `POST /api/analyze`: validated inputs to deterministic result; see shared result schema.
+- GET `/api/config`: provider availability only; no credentials.
+- POST `/api/extract`: `{name, content: base64, mode: local|gemini, consent}` → pages, rate candidates, source flags, limitations and optional token usage.
+- POST `/api/reprice`: `{activity_csv, rates: [{code, rate}], confirmed: true, uplift_pct?: 0..30}` → matched/unmatched rows, subtotals, coverage, limitations.
+- GET `/samples/offer.txt`, `/samples/activity.csv`: synthetic example files.
+- GET `/api/health`, `/api/schema`, `/api/example`, POST `/api/analyze`: original capacity calculator endpoints.
 
-See model.md for formulas, objective, assumptions, and limitations. A future AI explainer could summarize already-calculated results but is not necessary for the current product.
+Extracted rates are candidates, not trusted instructions. Plain-text DOM rendering prevents document HTML from executing. The server serves only explicit static paths, rejects foreign Origin POST requests, and never logs bodies, document text, or credential values. The environment file stays ignored. This is a local prototype, not a hardened multi-user document service.
